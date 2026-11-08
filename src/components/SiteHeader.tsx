@@ -19,7 +19,7 @@ export function SiteHeader() {
       <div className="site-header-inner">
         <Link href="/" className="site-brand" aria-label="投稿祭カレンダー トップ">
           <Image
-            src="/icon.png"
+            src="/festival-calendar/icon.png"
             alt=""
             width={44}
             height={44}

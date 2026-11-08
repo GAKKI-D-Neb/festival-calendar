@@ -17,8 +17,8 @@ export const metadata: Metadata = {
     "ボカロ曲や歌ってみたなど、さまざまな投稿祭の情報をまとめた非公式サイトです。投稿祭の検索や開催日程の確認にご利用ください。",
 
   icons: {
-    icon: "/icon.png",
-    apple: "/icon.png",
+    icon: "/festival-calendar/icon.png",
+    apple: "/festival-calendar/icon.png",
   },
 
   openGraph: {
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
       "ボカロ曲や歌ってみたなど、さまざまな投稿祭の情報をまとめた非公式サイトです。",
     images: [
       {
-        url: "/og-image.png",
+        url: "/festival-calendar/og-image.png",
         width: 1200,
         height: 630,
         alt: "投稿祭カレンダー",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     title: "投稿祭カレンダー",
     description:
       "ボカロ曲や歌ってみたなど、さまざまな投稿祭の情報をまとめた非公式サイトです。",
-    images: ["/og-image.png"],
+    images: ["/festival-calendar/og-image.png"],
   },
 };
 
