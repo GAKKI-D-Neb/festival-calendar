@@ -5,3 +5,7 @@ out/
 .env.local
 .env.*.local
 *.log
+
+# macOS
+.DS_Store
+**/.DS_Store
