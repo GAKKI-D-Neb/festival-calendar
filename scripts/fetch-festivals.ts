@@ -23,25 +23,6 @@ function parseDate(value: string | undefined): string | null {
 
   if (match) {
     const [, y, mo, d, h = "0", mi = "0", s = "0"] = match;
-    const year = Number(y);
-    const month = Number(mo);
-    const day = Number(d);
-    const hour = Number(h);
-    const minute = Number(mi);
-    const second = Number(s);
-
-    // Reject impossible dates/times instead of allowing Intl.DateTimeFormat
-    // to fail later while rendering the page.
-    const check = new Date(Date.UTC(year, month - 1, day, hour, minute, second));
-    if (
-      check.getUTCFullYear() !== year ||
-      check.getUTCMonth() !== month - 1 ||
-      check.getUTCDate() !== day ||
-      hour > 23 || minute > 59 || second > 59
-    ) {
-      throw new Error(`日付を解釈できません: ${value}`);
-    }
-
     return `${y}-${mo.padStart(2, "0")}-${d.padStart(2, "0")}T${h.padStart(2, "0")}:${mi}:${s}+09:00`;
   }
 
@@ -94,12 +75,9 @@ async function main() {
     throw new Error("GOOGLE_SHEETS_SPREADSHEET_ID が設定されていません。");
   }
 
-  const outputDir = path.join(process.cwd(), "public", "data");
-  await mkdir(outputDir, { recursive: true });
-  const availableYears: number[] = [];
+  const allFestivals = [];
 
   for (const yearText of years) {
-    const yearFestivals = [];
     const csv = await fetchSheetCsv(spreadsheetId, yearText);
     const records = parse(csv, {
       bom: true,
@@ -112,9 +90,6 @@ async function main() {
       const name = get(row, "投稿祭名");
       if (!name) continue;
 
-      // 削除フラグが立っている行は、日時解析も含めて完全にスキップする。
-      if (truthy(get(row, "削除フラグ"))) continue;
-
       const postingStart = parseDate(get(row, "投稿期間開始日時"));
       const postingEnd = parseDate(get(row, "投稿期間終了日時"));
       if (!postingStart || !postingEnd) {
@@ -122,15 +97,13 @@ async function main() {
         continue;
       }
 
-      // 開催期間が空欄なら、投稿期間と同じ期間として扱う。
-      // 片方だけ入力されている場合も、未入力側を投稿期間の日付で補完する。
-      const eventStart = parseDate(get(row, "開催期間開始日時")) ?? postingStart;
-      const eventEnd = parseDate(get(row, "開催期間終了日時")) ?? postingEnd;
+      const eventStart = parseDate(get(row, "開催期間開始日時"));
+      const eventEnd = parseDate(get(row, "開催期間終了日時"));
       const targets = get(row, "対象").split(",").map((item) => item.trim()).filter(Boolean);
 
       const id = get(row, "ID") || `${yearText}_${name}`.normalize("NFKC");
 
-      yearFestivals.push({
+      allFestivals.push({
         id,
         year: Number(yearText),
         name,
@@ -143,23 +116,19 @@ async function main() {
         officialUrl: get(row, "公式サイトURL") || null,
         organizer: get(row, "主催") || null,
         organizerUrl: get(row, "主催アカウントURL") || null,
-        deleted: false
+        deleted: truthy(get(row, "削除フラグ"))
       });
     }
-
-    yearFestivals.sort(
-      (a, b) => new Date(a.postingStart).getTime() - new Date(b.postingStart).getTime()
-    );
-    const year = Number(yearText);
-    availableYears.push(year);
-    const outputPath = path.join(outputDir, `festivals-${year}.json`);
-    await writeFile(outputPath, JSON.stringify(yearFestivals, null, 2) + "\n", "utf8");
-    console.log(`${year}年: ${yearFestivals.length}件を書き出しました: ${outputPath}`);
   }
 
-  const yearsPath = path.join(outputDir, "years.json");
-  await writeFile(yearsPath, JSON.stringify(availableYears.sort((a, b) => a - b), null, 2) + "\n", "utf8");
-  console.log(`${availableYears.length}年分のインデックスを書き出しました: ${yearsPath}`);
+  allFestivals.sort(
+    (a, b) => new Date(a.eventStart ?? a.postingStart).getTime() - new Date(b.eventStart ?? b.postingStart).getTime()
+  );
+
+  const outputPath = path.join(process.cwd(), "public", "data", "festivals.json");
+  await mkdir(path.dirname(outputPath), { recursive: true });
+  await writeFile(outputPath, JSON.stringify(allFestivals, null, 2) + "\n", "utf8");
+  console.log(`${allFestivals.length}件の投稿祭データを書き出しました: ${outputPath}`);
 }
 
 main().catch((error) => {
