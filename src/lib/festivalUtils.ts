@@ -20,7 +20,10 @@ export function filterFestivals(
       !options.selectedTargets.some((target) => festival.targets.includes(target))
     ) return false;
     return true;
-  }).sort((a, b) => new Date(a.eventStart ?? a.postingStart).getTime() - new Date(b.eventStart ?? b.postingStart).getTime());
+  }).sort((a, b) =>
+    new Date(a.eventStart ?? a.postingStart).getTime() -
+    new Date(b.eventStart ?? b.postingStart).getTime()
+  );
 }
 
 export function getAllTargets(festivals: Festival[]): string[] {

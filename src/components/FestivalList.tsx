@@ -94,18 +94,13 @@ export function FestivalList() {
     const groups = new Map<string, Festival[]>();
     cardFiltered.forEach((festival) => {
       const date = new Date(festival.eventStart ?? festival.postingStart);
-      const dateParts = Number.isNaN(date.getTime())
-        ? []
-        : new Intl.DateTimeFormat("en-US", {
+      const key = Number.isNaN(date.getTime())
+        ? "日程未設定"
+        : new Intl.DateTimeFormat("ja-JP", {
             timeZone: "Asia/Tokyo",
             year: "numeric",
             month: "numeric"
-          }).formatToParts(date);
-      const yearPart = dateParts.find((part) => part.type === "year")?.value;
-      const monthPart = dateParts.find((part) => part.type === "month")?.value;
-      const key = yearPart && monthPart
-        ? `${yearPart}年${monthPart}月`
-        : "日程未設定";
+          }).format(date).replace(" ", "");
       groups.set(key, [...(groups.get(key) ?? []), festival]);
     });
     return [...groups.entries()];
