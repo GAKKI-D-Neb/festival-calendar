@@ -111,12 +111,7 @@ export function FestivalCard({
         <FavoriteButton active={favorite} onClick={onToggleFavorite} />
       </div>
 
-      <div className="mt-3 rounded-xl border border-indigo-200 bg-gradient-to-r from-indigo-50 via-white to-sky-50 p-3 shadow-sm">
-        <div className="mb-2 flex items-center gap-2">
-          <span className="inline-flex h-6 w-6 items-center justify-center rounded-lg bg-indigo-100 text-indigo-700">▦</span>
-          <span className="text-xs font-extrabold tracking-wide text-indigo-900">期間・日程</span>
-        </div>
-        <div className="space-y-2">
+      <div className="mt-3 space-y-2">
           {samePeriod ? (
             <div className="rounded-lg border border-indigo-100 bg-white/85 px-3 py-2">
               <div className="text-[10px] font-bold text-indigo-700">投稿・開催期間</div>
@@ -140,7 +135,6 @@ export function FestivalCard({
               </div>
             </>
           )}
-        </div>
       </div>
       {(festival.organizer || festival.organizerUrl) && (
         <div className="mt-2 flex gap-2 text-xs">

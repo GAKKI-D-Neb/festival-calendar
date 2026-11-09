@@ -132,3 +132,49 @@ footer { color:var(--text-muted); }
   .bg-rose-50 { background-color:#321e2a !important; }
   .text-rose-800 { color:#fecdd3 !important; }
 }
+
+
+/* Festival filters: keep controls legible in both color schemes. */
+.festival-filters__option {
+  color: var(--text-main);
+  font-weight: 600;
+}
+.festival-filters__heading {
+  color: var(--text-main);
+}
+.festival-filters__checkbox {
+  flex: 0 0 auto;
+  accent-color: var(--accent);
+}
+.festival-filters__target {
+  color: var(--text-main);
+}
+.festival-filters__clear {
+  color: #3730a3;
+}
+
+@media (prefers-color-scheme: dark) {
+  .festival-filters {
+    background: linear-gradient(135deg, rgba(30, 41, 59, .96), rgba(17, 24, 39, .98)) !important;
+    border-color: #475569 !important;
+    color: #e5eaf5;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .24);
+  }
+  .festival-filters__option,
+  .festival-filters__heading {
+    color: #f1f5f9 !important;
+  }
+  .festival-filters__targets {
+    border-top-color: #475569 !important;
+  }
+  .festival-filters__checkbox {
+    accent-color: #a5b4fc;
+    color-scheme: dark;
+  }
+  .festival-filters__target {
+    color: #f1f5f9;
+  }
+  .festival-filters__clear {
+    color: #bfdbfe !important;
+  }
+}
