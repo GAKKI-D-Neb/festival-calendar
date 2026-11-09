@@ -16,5 +16,39 @@
     "organizer": "まいこ",
     "organizerUrl": "https://x.com/maiko3tattun",
     "deleted": false
+  },
+  {
+    "id": "2027-002",
+    "year": 2027,
+    "name": "ボカコレ2027冬",
+    "targets": [
+      "ボカロP"
+    ],
+    "postingStart": "2027-02-19T00:00:00+09:00",
+    "postingEnd": "2027-02-23T23:59:00+09:00",
+    "eventStart": "2027-02-19T00:00:00+09:00",
+    "eventEnd": "2027-02-23T23:59:00+09:00",
+    "detailUrl": null,
+    "officialUrl": "https://vocaloid-collection.jp/",
+    "organizer": "ボカコレ",
+    "organizerUrl": "https://x.com/the_voca_colle",
+    "deleted": false
+  },
+  {
+    "id": "2027-003",
+    "year": 2027,
+    "name": "歌踊コレ2027春",
+    "targets": [
+      "歌い手"
+    ],
+    "postingStart": "2027-03-11T00:00:00+09:00",
+    "postingEnd": "2027-03-15T23:59:00+09:00",
+    "eventStart": "2027-03-11T00:00:00+09:00",
+    "eventEnd": "2027-03-15T23:59:00+09:00",
+    "detailUrl": null,
+    "officialUrl": "https://utaodo-collection.jp/",
+    "organizer": "歌コレ【公式】",
+    "organizerUrl": "https://x.com/uta_colle",
+    "deleted": false
   }
 ]
