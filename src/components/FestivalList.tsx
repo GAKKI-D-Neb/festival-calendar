@@ -67,8 +67,12 @@ export function FestivalList() {
 
   const targets = useMemo(() => getAllTargets(festivals), [festivals]);
   const filtered = useMemo(() => filterFestivals(festivals, {
-    showEnded, favoritesOnly, favoriteIds, selectedTargets
-  }), [festivals, showEnded, favoritesOnly, favoriteIds, selectedTargets]);
+    year: year ?? 0,
+    showEnded,
+    favoritesOnly,
+    favoriteIds,
+    selectedTargets
+  }), [festivals, year, showEnded, favoritesOnly, favoriteIds, selectedTargets]);
   const cardFiltered = useMemo(() => {
     const query = searchText.trim().toLocaleLowerCase();
     return filtered
