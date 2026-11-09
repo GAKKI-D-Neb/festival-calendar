@@ -203,15 +203,15 @@ export function FestivalCalendar({
                     const inMonth = date.getUTCMonth() === month;
                     const isToday = key === keyFromParts(now);
                     return (
-                      <div key={key} className={`h-8 border-r border-slate-300 px-1 pt-1 text-[11px] last:border-r-0 ${inMonth?"bg-white":"bg-slate-50 text-slate-300"} ${dayIndex===0&&inMonth?"text-rose-600":dayIndex===6&&inMonth?"text-blue-700":""}`}>
-                        <span className={isToday?"inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-blue-700 px-1 font-bold text-white":""}>
+                      <div key={key} className={`h-6 border-r border-slate-300 px-1 pt-0.5 text-[10px] last:border-r-0 ${inMonth?"bg-white":"bg-slate-50 text-slate-300"} ${dayIndex===0&&inMonth?"text-rose-600":dayIndex===6&&inMonth?"text-blue-700":""}`}>
+                        <span className={isToday?"inline-flex h-4 min-w-4 items-center justify-center rounded-full bg-blue-700 px-1 font-bold text-white":""}>
                           {date.getUTCDate()}
                         </span>
                       </div>
                     );
                   })}
                 </div>
-                <div className="relative bg-white" style={{ height: "120px", minHeight: "120px", maxHeight: "120px", overflow: "hidden", backgroundImage: "linear-gradient(to right, #cbd5e1 1px, transparent 1px)", backgroundSize: "14.285714% 100%", backgroundPosition: "left top" }}>
+                <div className="relative bg-white" style={{ height: "90px", minHeight: "90px", maxHeight: "90px", overflow: "hidden", backgroundImage: "linear-gradient(to right, #cbd5e1 1px, transparent 1px)", backgroundSize: "14.285714% 100%", backgroundPosition: "left top" }}>
                   {segments.filter((segment) => segment.lane < laneCount).map((segment, index) => {
                     const left = ((segment.startColumn + segment.startFraction) / 7) * 100;
                     const right = ((6 - segment.endColumn + (1 - segment.endFraction)) / 7) * 100;
@@ -219,8 +219,8 @@ export function FestivalCalendar({
                       position: "absolute",
                       left: `${left}%`,
                       right: `${right}%`,
-                      top: `${Math.min(segment.lane, laneCount - 1) * 27 + 3}px`,
-                      height: "24px",
+                      top: `${Math.min(segment.lane, laneCount - 1) * 22 + 2}px`,
+                      height: "19px",
                       backgroundColor: segment.color
                     };
                     const isSelected = selected?.id === segment.festival.id;
@@ -230,7 +230,7 @@ export function FestivalCalendar({
                         onClick={() => setSelected(segment.festival)}
                         title={`${segment.festival.name}（${segment.type}）`}
                         style={style}
-                        className={`z-10 overflow-hidden rounded-md border border-slate-300/80 px-1.5 text-left text-[11px] font-bold leading-6 text-slate-700 shadow-sm transition hover:brightness-95 ${isSelected?"ring-2 ring-slate-700 ring-offset-1":""}`}
+                        className={`z-10 overflow-hidden rounded-md border border-slate-300/80 px-1 text-left text-[9px] font-bold leading-[18px] text-slate-700 shadow-sm transition hover:brightness-95 ${isSelected?"ring-2 ring-slate-700 ring-offset-1":""}`}
                       >
                         {segment.festival.name}
                       </button>

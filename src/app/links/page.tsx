@@ -42,7 +42,7 @@ export default function LinksPage() {
         <p className="text-xs font-extrabold tracking-[0.2em] text-indigo-600">ABOUT THIS SITE</p>
         <h2 className="mt-2 text-2xl font-black tracking-tight text-slate-900">このサイトについて</h2>
         <p className="mt-4 text-sm leading-8 text-slate-600">
-          このサイトは、ボカロ・音楽関連の投稿祭の日程を見つけやすくするために、個人（D-Neb GAKKI）が作成した非公式のまとめページです。
+          このサイトは、ニコニコ動画などのボカロ・音楽関連の投稿祭の日程を探しやすくするために、個人（D-Neb GAKKI）が作成した非公式のまとめページです。
         </p>
         <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-7 text-amber-950">
           <p className="font-extrabold">掲載情報についてのご注意</p>
@@ -52,8 +52,8 @@ export default function LinksPage() {
       <section className="grid gap-5 md:grid-cols-2">
         <div className="rounded-3xl border border-white bg-white/90 p-6 shadow-lg shadow-indigo-100/40">
           <p className="text-xs font-black tracking-widest text-indigo-600">RELATED LINKS</p>
-          <h3 className="mt-2 text-xl font-black text-slate-900">関連する投稿祭まとめ</h3>
-          <p className="mt-2 text-sm leading-7 text-slate-600">他の方が作成されている投稿祭まとめへのリンクです。こちらのサイトもご活用ください。</p>
+          <h3 className="mt-2 text-xl font-black text-slate-900">その他の投稿祭まとめ</h3>
+          <p className="mt-2 text-sm leading-7 text-slate-600">他の方が作成されている投稿祭まとめへのリンクです。</p>
           {relatedLinks.length ? <ul className="mt-5 space-y-3">{relatedLinks.map((link) => (
             <li key={link.url}>
               <a href={link.url} target="_blank" rel="noreferrer"
@@ -70,8 +70,20 @@ export default function LinksPage() {
         <div className="rounded-3xl border border-white bg-white/90 p-6 shadow-lg shadow-indigo-100/40">
           <p className="text-xs font-black tracking-widest text-indigo-600">CONTACT</p>
           <h3 className="mt-2 text-xl font-black text-slate-900">お問い合わせ</h3>
-          <p className="mt-2 text-sm leading-7 text-slate-600">掲載内容の誤りや追加情報などがありましたら、作成者（D-Neb GAKKI）までご連絡ください。</p>
-          <a href={contactUrl} target="_blank" rel="noreferrer" className="mt-5 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 px-5 py-3 text-sm font-extrabold text-white shadow-lg shadow-indigo-200 transition hover:-translate-y-0.5 hover:shadow-xl">D-Neb GAKKI のXアカウントへ <span>↗</span></a>
+          <p className="mt-2 text-sm leading-7 text-slate-600">掲載内容の誤りや追加情報、このサイトへの要望などがありましたら、作成者（D-Neb GAKKI）までご連絡ください。</p>
+          <a href={contactUrl} target="_blank" rel="noreferrer"
+            className="mt-5 flex items-center gap-4 rounded-2xl border border-indigo-100 bg-indigo-50/70 p-3 transition hover:border-indigo-300 hover:bg-indigo-100">
+            <img
+              src="/festival-calendar/organizer-icon.png"
+              alt="D-Neb GAKKIのアイコン"
+              className="h-14 w-14 shrink-0 rounded-full object-cover"
+            />
+            <span className="min-w-0 flex-1">
+              <span className="block text-sm font-extrabold text-indigo-900">D-Neb GAKKI</span>
+              <span className="mt-1 block text-xs text-slate-600">Xプロフィールを見る</span>
+            </span>
+            <span className="shrink-0 font-bold text-indigo-700">↗</span>
+          </a>
         </div>
       </section>
     </div>

@@ -9,9 +9,7 @@ export default function RegisterPage() {
         <p className="page-heading-description">ボカロ曲や歌ってみたなどの投稿祭の情報を集めています。</p>
       </div>
     <section className="rounded-3xl border border-white/80 bg-white/85 p-5 shadow-xl shadow-indigo-100/50 sm:p-8">
-      <p className="text-xs font-black tracking-[0.2em] text-indigo-600">SUBMIT INFORMATION</p>
-      <h2 className="mt-2 text-2xl font-black text-slate-900">投稿祭登録</h2>
-      <div className="mt-5"><RegistrationForm /></div>
+      <div className="mt-1"><RegistrationForm /></div>
     </section>
     </div>
   );

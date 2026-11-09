@@ -102,7 +102,7 @@ export function FestivalList() {
         <p className="page-eyebrow">EXPLORE FESTIVALS</p>
         <h1>投稿祭を探す</h1>
         <p className="page-heading-description">
-          ボカロ曲や歌ってみたなどの投稿祭の情報をまとめた非公式サイトです。
+          ニコニコ動画などで開催される、ボカロ曲や歌ってみたなどの投稿祭の情報をまとめた非公式サイトです。
           気になる投稿祭を探したり、開催日程を確認したりする際に、ぜひご活用ください。
         </p>
         <p className="page-heading-description">
