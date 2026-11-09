@@ -43,7 +43,12 @@ export function FestivalFilters({
         <div className="festival-filters__targets mt-3 border-t border-slate-200 pt-3">
           <div className="festival-filters__heading mb-2 text-sm font-semibold text-slate-700">対象で絞り込む</div>
           <div className="flex flex-wrap gap-x-4 gap-y-2">
-            {targets.map((target) => (
+            {[...targets].sort((a, b) => {
+              const order = ["ボカロP", "歌い手", "絵師", "ボイロP"];
+              const aIndex = order.indexOf(a);
+              const bIndex = order.indexOf(b);
+              return (aIndex === -1 ? order.length : aIndex) - (bIndex === -1 ? order.length : bIndex);
+            }).map((target) => (
               <label key={target} className={`festival-filters__target inline-flex cursor-pointer items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-semibold transition ${targetStyle(target)} ${selectedTargets.includes(target) ? "ring-2 ring-indigo-300 ring-offset-1" : "opacity-80 hover:opacity-100"}`}>
                 <input
                   className="festival-filters__checkbox"
