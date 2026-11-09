@@ -243,7 +243,8 @@ export function FestivalCalendar({
         </div>
 
         <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-[10px] text-slate-500">
-          <span>投稿期間と開催期間が異なる場合は、投稿期間と開催期間を合わせた期間を表示しています。</span>
+          <span>投稿・開催期間については、必ず投稿祭のTwiPlaや公式サイトなどでご確認ください。</span>
+          <span>同日に開催される投稿祭が多い場合、カレンダーにすべての投稿祭が表示されないことがあります。</span>
         </div>
       </section>
 

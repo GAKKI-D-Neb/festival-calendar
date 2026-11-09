@@ -106,8 +106,7 @@
     "year": 2026,
     "name": "調声晒し投稿祭2026",
     "targets": [
-      "ボカロP",
-      "ボイロP"
+      "ボカロP"
     ],
     "postingStart": "2026-01-31T16:00:00+09:00",
     "postingEnd": "2026-02-15T23:59:00+09:00",
@@ -439,7 +438,7 @@
     "detailUrl": "https://twipla.jp/events/705065",
     "officialUrl": "https://hontono-rookie-web-2026spring.vercel.app/",
     "organizer": "SynNightP",
-    "organizerUrl": "https://x.com/syn523",
+    "organizerUrl": "https://x.com/SynNightPsub",
     "deleted": false
   },
   {
@@ -568,7 +567,8 @@
     "year": 2026,
     "name": "野良投稿祭",
     "targets": [
-      "ボカロP"
+      "ボカロP",
+      "歌い手"
     ],
     "postingStart": "2026-05-15T20:00:00+09:00",
     "postingEnd": "2026-05-17T23:59:00+09:00",
@@ -1082,8 +1082,7 @@
     "year": 2026,
     "name": "花隈千冬投稿祭2026夏",
     "targets": [
-      "ボカロP",
-      "ボイロP"
+      "ボカロP"
     ],
     "postingStart": "2026-08-08T18:00:00+09:00",
     "postingEnd": "2026-08-23T21:00:00+09:00",
@@ -1136,8 +1135,7 @@
     "targets": [
       "ボカロP",
       "歌い手",
-      "絵師",
-      "ボイロP"
+      "絵師"
     ],
     "postingStart": "2026-08-15T00:00:00+09:00",
     "postingEnd": "2026-08-31T23:59:00+09:00",
@@ -1232,6 +1230,23 @@
     "officialUrl": null,
     "organizer": "Miya.P",
     "organizerUrl": "https://x.com/MiyaPayiM",
+    "deleted": false
+  },
+  {
+    "id": "2026-123",
+    "year": 2026,
+    "name": "本当のルーキー祭り2026秋(5期)",
+    "targets": [
+      "ボカロP"
+    ],
+    "postingStart": "2026-09-04T17:00:00+09:00",
+    "postingEnd": "2026-09-12T04:00:00+09:00",
+    "eventStart": "2026-09-04T17:00:00+09:00",
+    "eventEnd": "2026-10-18T23:59:00+09:00",
+    "detailUrl": "https://twipla.jp/events/731912",
+    "officialUrl": "https://2026autumn.hontono-rookie-web.workers.dev/",
+    "organizer": "SynNightP",
+    "organizerUrl": "https://x.com/SynNightPsub",
     "deleted": false
   },
   {
@@ -1599,9 +1614,9 @@
       "ボカロP"
     ],
     "postingStart": "2026-10-30T18:00:00+09:00",
-    "postingEnd": "2026-10-30T23:59:00+09:00",
+    "postingEnd": "2026-11-03T23:59:00+09:00",
     "eventStart": "2026-10-30T18:00:00+09:00",
-    "eventEnd": "2026-10-30T23:59:00+09:00",
+    "eventEnd": "2026-11-03T23:59:00+09:00",
     "detailUrl": "https://twipla.jp/events/719401",
     "officialUrl": null,
     "organizer": "ダ王P(やっくー)",
@@ -1616,9 +1631,9 @@
       "ボカロP"
     ],
     "postingStart": "2026-10-30T19:00:00+09:00",
-    "postingEnd": "2026-10-30T23:59:00+09:00",
+    "postingEnd": "2026-11-01T23:59:00+09:00",
     "eventStart": "2026-10-30T19:00:00+09:00",
-    "eventEnd": "2026-10-30T23:59:00+09:00",
+    "eventEnd": "2026-11-01T23:59:00+09:00",
     "detailUrl": "https://twipla.jp/events/743166",
     "officialUrl": null,
     "organizer": "373.514kw",
@@ -1633,9 +1648,9 @@
       "ボカロP"
     ],
     "postingStart": "2026-10-30T19:00:00+09:00",
-    "postingEnd": "2026-10-30T23:59:00+09:00",
+    "postingEnd": "2026-11-01T23:59:00+09:00",
     "eventStart": "2026-10-30T19:00:00+09:00",
-    "eventEnd": "2026-10-30T23:59:00+09:00",
+    "eventEnd": "2026-11-01T23:59:00+09:00",
     "detailUrl": "https://twipla.jp/events/722545",
     "officialUrl": null,
     "organizer": "やしP",
@@ -1657,6 +1672,23 @@
     "officialUrl": null,
     "organizer": "筑紫 椿 📱 UTAてるの",
     "organizerUrl": "https://x.com/hibikurorekishi",
+    "deleted": false
+  },
+  {
+    "id": "2026-125",
+    "year": 2026,
+    "name": "火属性ボカロ曲歌ってみた投稿祭",
+    "targets": [
+      "歌い手"
+    ],
+    "postingStart": "2026-11-01T00:00:00+09:00",
+    "postingEnd": "2026-11-14T23:59:00+09:00",
+    "eventStart": "2026-11-01T00:00:00+09:00",
+    "eventEnd": "2026-11-14T23:59:00+09:00",
+    "detailUrl": "https://x.com/zokusei_toukou/status/2116877171759387061",
+    "officialUrl": null,
+    "organizer": "真菜子, まくおんぐ",
+    "organizerUrl": "https://x.com/zokusei_toukou",
     "deleted": false
   },
   {
@@ -1715,7 +1747,8 @@
     "year": 2026,
     "name": "第2回 野良投稿祭",
     "targets": [
-      "ボカロP"
+      "ボカロP",
+      "歌い手"
     ],
     "postingStart": "2026-11-06T20:00:00+09:00",
     "postingEnd": "2026-11-08T23:59:00+09:00",
@@ -1813,6 +1846,24 @@
     "officialUrl": null,
     "organizer": "筑紫 椿 📱 UTAてるの",
     "organizerUrl": "https://x.com/hibikurorekishi",
+    "deleted": false
+  },
+  {
+    "id": "2026-124",
+    "year": 2026,
+    "name": "無職と汚名祭",
+    "targets": [
+      "ボカロP",
+      "歌い手"
+    ],
+    "postingStart": "2026-11-14T00:00:00+09:00",
+    "postingEnd": "2026-11-15T23:59:00+09:00",
+    "eventStart": "2026-11-14T00:00:00+09:00",
+    "eventEnd": "2026-11-15T23:59:00+09:00",
+    "detailUrl": "https://twipla.jp/events/741782",
+    "officialUrl": null,
+    "organizer": "mavie, やに子",
+    "organizerUrl": "https://x.com/mushoku_omeisai",
     "deleted": false
   },
   {
@@ -1941,7 +1992,9 @@
     "year": 2026,
     "name": "祝！ニコニコ20周年投稿祭",
     "targets": [
-      "ボカロP"
+      "ボカロP",
+      "歌い手",
+      "絵師"
     ],
     "postingStart": "2026-12-12T00:00:00+09:00",
     "postingEnd": "2026-12-19T23:59:00+09:00",
@@ -1958,8 +2011,7 @@
     "year": 2026,
     "name": "花隈千冬投稿祭2026冬",
     "targets": [
-      "ボカロP",
-      "ボイロP"
+      "ボカロP"
     ],
     "postingStart": "2026-12-12T00:00:00+09:00",
     "postingEnd": "2026-12-27T23:59:00+09:00",
