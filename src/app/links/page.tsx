@@ -79,7 +79,7 @@ export default function LinksPage() {
               className="h-14 w-14 shrink-0 rounded-full object-cover"
             />
             <span className="min-w-0 flex-1">
-              <span className="block text-sm font-extrabold text-indigo-900">D-Neb GAKKI</span>
+              <span className="block text-sm font-extrabold text-indigo-900">D-Neb GAKKI｜つたないP</span>
               <span className="mt-1 block text-xs text-slate-600">Xプロフィールを見る</span>
             </span>
             <span className="shrink-0 font-bold text-indigo-700">↗</span>

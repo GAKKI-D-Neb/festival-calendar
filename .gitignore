@@ -6,6 +6,9 @@ out/
 .env.*.local
 *.log
 
+# Generated data
+/public/data/*.json
+
 # macOS
 .DS_Store
 **/.DS_Store
