@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import type { Festival } from "@/types/festival";
 import { formatDateRange, getFestivalStatus } from "@/lib/dateUtils";
 import { FavoriteButton } from "@/components/FavoriteButton";
@@ -67,6 +68,67 @@ function daysUntil(value: string): number | null {
   return Math.max(0, Math.ceil((target - today) / 86400000));
 }
 
+function FestivalTitle({ name }: { name: string }) {
+  const containerRef = useRef<HTMLHeadingElement>(null);
+  const textRef = useRef<HTMLSpanElement>(null);
+  const [overflows, setOverflows] = useState(false);
+  const [distance, setDistance] = useState(0);
+  const [isScrolling, setIsScrolling] = useState(false);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const text = textRef.current;
+    if (!container || !text) return;
+
+    const measure = () => {
+      const overflow = text.scrollWidth > container.clientWidth + 1;
+      setOverflows(overflow);
+      setDistance(Math.max(0, text.scrollWidth - container.clientWidth));
+    };
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(container);
+    observer.observe(text);
+    return () => observer.disconnect();
+  }, [name]);
+
+  return (
+    <h3
+      ref={containerRef}
+      className="festival-card-title mt-0 min-w-0 w-full overflow-hidden whitespace-nowrap text-base font-extrabold leading-snug text-slate-900"
+      title={name}
+      onClick={() => {
+        if (overflows) setIsScrolling((current) => !current);
+      }}
+      role={overflows ? "button" : undefined}
+      tabIndex={overflows ? 0 : undefined}
+      aria-label={overflows ? `タップしてタイトルをスクロール：${name}` : undefined}
+      onKeyDown={(event) => {
+        if (overflows && (event.key === "Enter" || event.key === " ")) {
+          event.preventDefault();
+          setIsScrolling((current) => !current);
+        }
+      }}
+    >
+      <span
+        ref={textRef}
+        className={`festival-card-title__text${overflows ? " is-overflowing" : ""}${isScrolling ? " is-scrolling" : ""}`}
+        style={
+          overflows
+            ? ({
+                "--festival-title-distance": `${distance}px`,
+                "--festival-title-duration": `${Math.max(1, distance / 80)}s`
+              } as React.CSSProperties)
+            : undefined
+        }
+      >
+        {name}
+      </span>
+    </h3>
+  );
+}
+
 export function FestivalCard({
   festival,
   favorite,
@@ -90,7 +152,7 @@ export function FestivalCard({
   const samePeriod = isSameRange(festival);
 
   return (
-    <article className="rounded-xl border border-slate-200 bg-white p-3 shadow-sm transition hover:border-slate-300 hover:shadow-md">
+    <article className="flex h-full min-w-0 w-full flex-col rounded-xl border border-slate-200 bg-white p-3 shadow-sm transition hover:border-slate-300 hover:shadow-md">
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0 flex-1">
           <div className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-2">
@@ -106,14 +168,14 @@ export function FestivalCard({
               ))}
             </div>
           </div>
-          <h3 className="break-words text-base font-extrabold leading-snug text-slate-900">{festival.name}</h3>
+          <FestivalTitle name={festival.name} />
         </div>
         <FavoriteButton active={favorite} onClick={onToggleFavorite} />
       </div>
 
-      <div className="mt-3 space-y-2">
+      <div className="mt-3 grid grid-rows-2 gap-2">
           {samePeriod ? (
-            <div className="rounded-lg border border-indigo-100 bg-white/85 px-3 py-2">
+            <div className="row-span-2 flex min-h-[88px] flex-col justify-center rounded-lg border border-indigo-100 bg-white/85 px-3 py-2">
               <div className="text-[10px] font-bold text-indigo-700">投稿・開催期間</div>
               <div className="mt-0.5 text-sm font-extrabold leading-relaxed text-slate-900">
                 {formatDateRange(festival.postingStart, festival.postingEnd)}
@@ -121,13 +183,13 @@ export function FestivalCard({
             </div>
           ) : (
             <>
-              <div className="rounded-lg border border-indigo-100 bg-white/85 px-3 py-2">
+              <div className="flex min-h-[40px] flex-col justify-center rounded-lg border border-indigo-100 bg-white/85 px-3 py-2">
                 <div className="text-[10px] font-bold text-indigo-700">投稿期間</div>
                 <div className="mt-0.5 text-sm font-extrabold leading-relaxed text-slate-900">
                   {formatDateRange(festival.postingStart, festival.postingEnd)}
                 </div>
               </div>
-              <div className="rounded-lg border border-sky-100 bg-white/85 px-3 py-2">
+              <div className="flex min-h-[40px] flex-col justify-center rounded-lg border border-sky-100 bg-white/85 px-3 py-2">
                 <div className="text-[10px] font-bold text-sky-700">開催期間</div>
                 <div className="mt-0.5 text-sm font-extrabold leading-relaxed text-slate-900">
                   {formatDateRange(festival.eventStart, festival.eventEnd)}
@@ -152,7 +214,7 @@ export function FestivalCard({
       )}
 
       {(festival.detailUrl || festival.officialUrl) && (
-        <div className="mt-3 flex flex-wrap gap-1.5">
+        <div className="mt-auto pt-3 flex flex-wrap gap-1.5">
           {festival.detailUrl && (
             <a href={festival.detailUrl} target="_blank" rel="noreferrer"
               className="rounded-lg bg-blue-700 px-3 py-1.5 text-[11px] font-bold text-white shadow-sm hover:bg-blue-800">
