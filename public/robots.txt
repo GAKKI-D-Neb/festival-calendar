@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gakki-d-neb.github.io/festival-calendar/sitemap.xml
