@@ -2,19 +2,16 @@ import type { Festival, FestivalStatus } from "@/types/festival";
 
 const JST_OFFSET_MS = 9 * 60 * 60 * 1000;
 
-function validDate(value: string | null | undefined): Date | null {
-  if (!value) return null;
-  const date = new Date(value);
-  return Number.isNaN(date.getTime()) ? null : date;
-}
-
 export function nowInJst(): Date {
+  // A Date stores an absolute instant. This helper is useful for obtaining
+  // the current instant; date comparisons should use timestamps directly.
   return new Date();
 }
 
 export function formatDateTime(value: string | null): string {
-  const date = validDate(value);
-  if (!date) return value ?? "";
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
   const parts = new Intl.DateTimeFormat("ja-JP", {
     timeZone: "Asia/Tokyo",
     year: "numeric",
@@ -29,17 +26,43 @@ export function formatDateTime(value: string | null): string {
 }
 
 export function formatDateRange(start: string | null, end: string | null): string {
-  const s = validDate(start);
-  const e = validDate(end);
+  if (!start && !end) return "未設定";
+  if (!start) return `〜 ${formatDateTime(end)}`;
+  if (!end) return `${formatDateTime(start)} 〜`;
+  const s = new Date(start);
+  const e = new Date(end);
+  const getJstTime = (date: Date) => {
+    const parts = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Asia/Tokyo",
+      hour: "2-digit",
+      minute: "2-digit",
+      hourCycle: "h23"
+    }).formatToParts(date);
+    return {
+      hour: Number(parts.find((part) => part.type === "hour")?.value ?? -1),
+      minute: Number(parts.find((part) => part.type === "minute")?.value ?? -1)
+    };
+  };
 
-  if (!s && !e) return "未設定";
-  if (!s) return `〜 ${formatDateTime(end)}`;
-  if (!e) return `${formatDateTime(start)} 〜`;
+  const startTime = getJstTime(s);
+  const endTime = getJstTime(e);
+  const isWholeDayRange =
+    startTime.hour === 0 && startTime.minute === 0 &&
+    endTime.hour === 23 && endTime.minute === 59;
+
+  if (isWholeDayRange) {
+    const dateFormatter = new Intl.DateTimeFormat("ja-JP", {
+      timeZone: "Asia/Tokyo",
+      year: "numeric",
+      month: "numeric",
+      day: "numeric"
+    });
+    return `${dateFormatter.format(s)}〜${dateFormatter.format(e)}`;
+  }
 
   const sameDay =
     s.toLocaleDateString("ja-JP", { timeZone: "Asia/Tokyo" }) ===
     e.toLocaleDateString("ja-JP", { timeZone: "Asia/Tokyo" });
-
   if (sameDay) {
     const date = new Intl.DateTimeFormat("ja-JP", {
       timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit"
@@ -56,13 +79,10 @@ export function formatDateRange(start: string | null, end: string | null): strin
 }
 
 export function getFestivalStatus(festival: Festival, now = Date.now()): FestivalStatus {
-  const postingStart = validDate(festival.postingStart)?.getTime();
-  const postingEnd = validDate(festival.postingEnd)?.getTime();
-  const eventStart = validDate(festival.eventStart)?.getTime() ?? null;
-  const eventEnd = validDate(festival.eventEnd)?.getTime() ?? null;
-
-  // Defensive fallback for old or manually edited JSON data.
-  if (postingStart === undefined || postingEnd === undefined) return "upcoming";
+  const postingStart = new Date(festival.postingStart).getTime();
+  const postingEnd = new Date(festival.postingEnd).getTime();
+  const eventStart = festival.eventStart ? new Date(festival.eventStart).getTime() : null;
+  const eventEnd = festival.eventEnd ? new Date(festival.eventEnd).getTime() : null;
 
   if (eventStart !== null && eventEnd !== null && now >= eventStart && now <= eventEnd) {
     return "event-active";
@@ -76,9 +96,7 @@ export function getFestivalStatus(festival: Festival, now = Date.now()): Festiva
 }
 
 export function getFestivalFinalEnd(festival: Festival): number {
-  return validDate(festival.eventEnd ?? festival.postingEnd)?.getTime()
-    ?? validDate(festival.postingEnd)?.getTime()
-    ?? 0;
+  return new Date(festival.eventEnd ?? festival.postingEnd).getTime();
 }
 
 export function isFestivalEnded(festival: Festival, now = Date.now()): boolean {
@@ -102,11 +120,11 @@ export function jstDateKey(date: Date): string {
 }
 
 export function dateKeyFromInstant(iso: string): string {
-  const date = validDate(iso);
-  return date ? jstDateKey(date) : "";
+  return jstDateKey(new Date(iso));
 }
 
 export function calendarDateKey(year: number, monthIndex: number, day: number): string {
+  // monthIndex is 0-based. UTC construction avoids the browser's local timezone.
   const utc = new Date(Date.UTC(year, monthIndex, day));
   return jstDateKey(new Date(utc.getTime() - JST_OFFSET_MS));
 }

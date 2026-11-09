@@ -230,7 +230,7 @@ export function FestivalCalendar({
                         onClick={() => setSelected(segment.festival)}
                         title={`${segment.festival.name}（${segment.type}）`}
                         style={style}
-                        className={`z-10 overflow-hidden rounded-md border border-slate-300/80 px-1 text-left text-[9px] font-bold leading-[18px] text-slate-700 shadow-sm transition hover:brightness-95 ${isSelected?"ring-2 ring-slate-700 ring-offset-1":""}`}
+                        className={`festival-calendar-bar z-10 overflow-hidden rounded-md border border-slate-300/80 px-1 text-left text-[12px] font-bold leading-[18px] text-slate-700 shadow-sm transition hover:brightness-95 ${isSelected?"ring-2 ring-slate-700 ring-offset-1":""}`}
                       >
                         {segment.festival.name}
                       </button>
@@ -243,8 +243,7 @@ export function FestivalCalendar({
         </div>
 
         <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-[10px] text-slate-500">
-          <span>投稿期間と開催期間を合わせた期間を表示しています。</span>
-          <span>色は投稿祭ごとに異なります</span>
+          <span>投稿期間と開催期間が異なる場合は、投稿期間と開催期間を合わせた期間を表示しています。</span>
         </div>
       </section>
 

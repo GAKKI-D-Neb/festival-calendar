@@ -4,9 +4,18 @@ export function RegistrationForm() {
   return (
     <section className="space-y-4">
       <div>
-        <h2 className="text-xl font-bold">投稿祭登録</h2>
+        <h2 className="text-xl font-bold">投稿祭登録フォーム</h2>
         <p className="mt-2 text-sm leading-7 text-slate-600">
-          投稿祭一覧に掲載するため、投稿祭の情報提供を受け付けています。
+          投稿祭一覧に掲載するため、投稿祭の情報提供を下記の
+          <a
+            href={formUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-blue-700 underline underline-offset-2 hover:text-blue-900"
+          >
+            情報提供フォーム
+          </a>
+          から受け付けています。
           お寄せいただいた情報は確認のうえ、一覧に反映します。
         </p>
       </div>
