@@ -62,8 +62,7 @@ export default function LinksPage() {
       <section className="grid gap-5 md:grid-cols-2">
         <div className="rounded-3xl border border-white bg-white/90 p-6 shadow-lg shadow-indigo-100/40">
           <p className="text-xs font-black tracking-widest text-indigo-600">RELATED LINKS</p>
-          <h3 className="mt-2 text-xl font-black text-slate-900">その他の投稿祭情報サイト
-          </h3>
+          <h3 className="mt-2 text-xl font-black text-slate-900">その他の投稿祭情報サイト</h3>
           <p className="mt-2 text-sm leading-7 text-slate-600">このサイト以外の、投稿祭情報を探せるサイトなどを紹介します。</p>
           {relatedLinks.length ? <ul className="mt-5 space-y-3">{relatedLinks.map((link) => (
             <li key={link.url}>
