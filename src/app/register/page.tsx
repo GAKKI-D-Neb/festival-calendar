@@ -7,7 +7,7 @@ export default function RegisterPage() {
         <p className="page-eyebrow">SUBMIT INFORMATION</p>
         <h1>投稿祭登録</h1>
         <p className="page-heading-description">
-          このサイトに掲載するため、ボカロ曲や歌ってみたなどの投稿祭の情報を集めています。
+          このサイトに掲載するため、ボカロ曲や歌ってみたなどの音楽系投稿祭の情報を集めています。
         </p>
         <p className="page-heading-description">
           まだ掲載されていない投稿祭がありましたら、ぜひご登録ください。
