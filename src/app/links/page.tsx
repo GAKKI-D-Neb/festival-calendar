@@ -52,7 +52,7 @@ export default function LinksPage() {
         <p className="text-xs font-extrabold tracking-[0.2em] text-indigo-600">ABOUT THIS SITE</p>
         <h2 className="mt-2 text-2xl font-black tracking-tight text-slate-900">このサイトについて</h2>
         <p className="mt-4 text-sm leading-8 text-slate-600">
-          このサイトは、ニコニコ動画などのボカロ・音楽関連の投稿祭の日程を探しやすくするために、個人（D-Neb GAKKI）が作成した非公式のまとめページです。
+          このサイトは、ニコニコ動画などのボカロ・歌ってみたなどの音楽関連の投稿祭の日程を探しやすくするために、個人（D-Neb GAKKI）が作成した非公式のまとめページです。
         </p>
         <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-7 text-amber-950">
           <p className="font-extrabold">掲載情報についてのご注意</p>

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "ボカロ、歌ってみた、演奏してみたなど、音楽に関する投稿祭・イベントの開催情報をまとめた非公式サイトです。",
+    "ボカロ・歌ってみたなど、音楽に関する投稿祭・イベントの開催情報をまとめた非公式サイトです。",
 
   icons: {
     icon: `${siteUrl}/icon.png`,
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     siteName: "投稿祭カレンダー",
     title: "投稿祭カレンダー",
     description:
-      "ボカロ、歌ってみた、演奏してみたなど、音楽に関する投稿祭・イベントの開催情報をまとめた非公式サイトです。",
+      "ボカロ・歌ってみたなど、音楽に関する投稿祭・イベントの開催情報をまとめた非公式サイトです。",
     images: [
       {
         url: `${siteUrl}/og-image.png`,
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "投稿祭カレンダー",
     description:
-      "ボカロ、歌ってみた、演奏してみたなど、音楽に関する投稿祭・イベントの開催情報をまとめた非公式サイトです。",
+      "ボカロ・歌ってみたなど、音楽に関する投稿祭・イベントの開催情報をまとめた非公式サイトです。",
     images: [`${siteUrl}/og-image.png`],
   },
 };
