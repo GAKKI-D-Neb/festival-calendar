@@ -13,19 +13,29 @@ const relatedLinks: RelatedLink[] = [
   //   url: "https://example.com"
   // }
   {
+     name: "【2026年版】ニコニコで実施の投稿祭スケジュール",
+     description: "ニコニコインフォが公開している、2026年の投稿祭のスケジュール",
+     url: "https://blog.nicovideo.jp/niconews/271837.html"
+  },
+  {
+     name: "ニコニコ投稿祭ナビ",
+     description: "ニコニコの投稿祭を紹介・案内する公式Xアカウント",
+     url: "https://x.com/nico_usersevent"
+  },
+  {
+     name: "投稿祭サーチ",
+     description: "ニコニコの投稿祭や誕生祭の検索サイト",
+     url: "https://toukousai-search.nicoranweb.com/"
+  },
+  {
      name: "ボカロ投稿祭スケジュールまとめ！！",
-     description: "NorthP様が作成しているボカロ投稿祭まとめ",
+     description: "NorthP様が作成しているボカロ投稿祭のスケジュールまとめ",
      url: "https://note.com/northgazemusic/n/n1e334e5738f5"
   },
   {
      name: "ボカロ投稿祭・イベントスケジュールまとめ【日程表＋概要】",
-     description: "おゆひよこ様が作成しているボカロ投稿祭まとめ",
+     description: "おゆひよこ様が作成しているボカロ投稿祭や関連イベントの日程まとめ",
      url: "https://oyu-sound.com/vocaloid-event-matome/"
-  },
-  {
-     name: "【2026年版】ニコニコで実施の投稿祭スケジュール",
-     description: "ニコニコインフォの投稿祭スケジュールの紹介",
-     url: "https://blog.nicovideo.jp/niconews/271837.html"
   }
 ];
 
@@ -42,7 +52,7 @@ export default function LinksPage() {
         <p className="text-xs font-extrabold tracking-[0.2em] text-indigo-600">ABOUT THIS SITE</p>
         <h2 className="mt-2 text-2xl font-black tracking-tight text-slate-900">このサイトについて</h2>
         <p className="mt-4 text-sm leading-8 text-slate-600">
-          このサイトは、ニコニコ動画などのボカロ・音楽関連の投稿祭の日程を探しやすくするために、個人（D-Neb GAKKI）が作成した非公式のまとめページです。
+          このサイトは、ニコニコ動画などのボカロ・歌ってみたなどの音楽関連の投稿祭の日程を探しやすくするために、個人（D-Neb GAKKI）が作成した非公式のまとめページです。
         </p>
         <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-7 text-amber-950">
           <p className="font-extrabold">掲載情報についてのご注意</p>
@@ -52,8 +62,8 @@ export default function LinksPage() {
       <section className="grid gap-5 md:grid-cols-2">
         <div className="rounded-3xl border border-white bg-white/90 p-6 shadow-lg shadow-indigo-100/40">
           <p className="text-xs font-black tracking-widest text-indigo-600">RELATED LINKS</p>
-          <h3 className="mt-2 text-xl font-black text-slate-900">その他の投稿祭まとめ</h3>
-          <p className="mt-2 text-sm leading-7 text-slate-600">他の方が作成されている投稿祭まとめへのリンクです。</p>
+          <h3 className="mt-2 text-xl font-black text-slate-900">その他の投稿祭情報サイト</h3>
+          <p className="mt-2 text-sm leading-7 text-slate-600">このサイト以外の、投稿祭情報を探せるサイトなどを紹介します。</p>
           {relatedLinks.length ? <ul className="mt-5 space-y-3">{relatedLinks.map((link) => (
             <li key={link.url}>
               <a href={link.url} target="_blank" rel="noreferrer"

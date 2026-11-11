@@ -28,6 +28,7 @@ export function SiteHeader() {
           <span>
             <span className="site-brand-kicker">MUSIC & CREATIVE EVENTS</span>
             <span className="site-brand-title">投稿祭カレンダー</span>
+            <span className="block text-xs">音楽系投稿祭・イベント情報まとめ</span>
           </span>
         </Link>
 
