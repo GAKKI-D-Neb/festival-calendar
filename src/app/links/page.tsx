@@ -28,6 +28,16 @@ const relatedLinks: RelatedLink[] = [
      url: "https://toukousai-search.nicoranweb.com/"
   },
   {
+    name: "UTAU SCHEDULE",
+    description: "UTAU関連の投稿祭やイベントのスケジュールを掲載しているサイト",
+    url: "https://utau-schedule.vercel.app/"
+  },
+  {
+    name: "探すん",
+    description: "ボカロ関連の投稿祭やイベントを検索・確認できるサイト",
+    url: "https://sagasun.com/features/vocaloid"
+  },
+  {
      name: "ボカロ投稿祭スケジュールまとめ！！",
      description: "NorthP様が作成しているボカロ投稿祭のスケジュールまとめ",
      url: "https://note.com/northgazemusic/n/n1e334e5738f5"
