@@ -22,10 +22,23 @@ export function targetStyle(target: string): string {
   return "border-slate-200 bg-slate-50 text-slate-700";
 }
 
+function hasPostingPeriod(festival: Festival): boolean {
+  return Boolean(festival.postingStart || festival.postingEnd);
+}
+
+function hasEventPeriod(festival: Festival): boolean {
+  return Boolean(festival.eventStart || festival.eventEnd);
+}
+
 function isSameRange(festival: Festival): boolean {
-  if (!festival.eventStart || !festival.eventEnd) return true;
-  return new Date(festival.postingStart).getTime() === new Date(festival.eventStart).getTime()
-    && new Date(festival.postingEnd).getTime() === new Date(festival.eventEnd).getTime();
+  if (!hasPostingPeriod(festival) || !hasEventPeriod(festival)) return false;
+
+  const sameStart =
+    (festival.postingStart || null) === (festival.eventStart || null);
+  const sameEnd =
+    (festival.postingEnd || null) === (festival.eventEnd || null);
+
+  return sameStart && sameEnd;
 }
 
 function daysUntil(value: string): number | null {
@@ -138,8 +151,13 @@ export function FestivalCard({
   favorite: boolean;
   onToggleFavorite: () => void;
 }) {
+  const hasPosting = hasPostingPeriod(festival);
+  const hasEvent = hasEventPeriod(festival);
   const status = getFestivalStatus(festival);
-  const countdown = status === "upcoming" ? daysUntil(festival.postingStart) : null;
+  const countdownTarget = festival.postingStart || festival.eventStart;
+  const countdown = status === "upcoming" && countdownTarget
+    ? daysUntil(countdownTarget)
+    : null;
   const statusClass =
     status === "accepting" || status === "event-active"
       ? "bg-emerald-100 text-emerald-800 ring-emerald-200"
@@ -150,6 +168,8 @@ export function FestivalCard({
           : "bg-blue-100 text-blue-800 ring-blue-200";
 
   const samePeriod = isSameRange(festival);
+  const statusLabel =
+    !hasPosting && status === "upcoming" ? "開催前" : statusLabels[status];
 
   return (
     <article className="flex h-full min-w-0 w-full flex-col rounded-xl border border-slate-200 bg-white p-3 shadow-sm transition hover:border-slate-300 hover:shadow-md">
@@ -157,7 +177,7 @@ export function FestivalCard({
         <div className="min-w-0 flex-1">
           <div className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-2">
             <span className={`inline-flex items-center rounded-md px-2 py-1 text-[10px] font-extrabold tracking-wide ring-1 ring-inset ${statusClass}`}>
-              {countdown !== null ? `あと${countdown}日` : statusLabels[status]}
+              {countdown !== null ? `あと${countdown}日` : statusLabel}
             </span>
             <div className="flex flex-wrap items-center gap-1.5 border-l border-slate-200 pl-3">
               <span className="mr-0.5 text-[9px] font-bold uppercase tracking-wider text-slate-400">対象</span>
@@ -173,31 +193,49 @@ export function FestivalCard({
         <FavoriteButton active={favorite} onClick={onToggleFavorite} />
       </div>
 
-      <div className="mt-3 grid grid-rows-2 gap-2">
-          {samePeriod ? (
+      {(hasPosting || hasEvent) && (
+        <div className="mt-3 grid grid-rows-2 gap-2">
+          {hasPosting && hasEvent ? (
+            samePeriod ? (
+              <div className="row-span-2 flex min-h-[88px] flex-col justify-center rounded-lg border border-indigo-100 bg-white/85 px-3 py-2">
+                <div className="text-[10px] font-bold text-indigo-700">投稿・開催期間</div>
+                <div className="mt-0.5 text-sm font-extrabold leading-relaxed text-slate-900">
+                  {formatDateRange(festival.postingStart, festival.postingEnd)}
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="flex min-h-[40px] flex-col justify-center rounded-lg border border-indigo-100 bg-white/85 px-3 py-2">
+                  <div className="text-[10px] font-bold text-indigo-700">投稿期間</div>
+                  <div className="mt-0.5 text-sm font-extrabold leading-relaxed text-slate-900">
+                    {formatDateRange(festival.postingStart, festival.postingEnd)}
+                  </div>
+                </div>
+                <div className="flex min-h-[40px] flex-col justify-center rounded-lg border border-sky-100 bg-white/85 px-3 py-2">
+                  <div className="text-[10px] font-bold text-sky-700">開催期間</div>
+                  <div className="mt-0.5 text-sm font-extrabold leading-relaxed text-slate-900">
+                    {formatDateRange(festival.eventStart, festival.eventEnd)}
+                  </div>
+                </div>
+              </>
+            )
+          ) : hasPosting ? (
             <div className="row-span-2 flex min-h-[88px] flex-col justify-center rounded-lg border border-indigo-100 bg-white/85 px-3 py-2">
-              <div className="text-[10px] font-bold text-indigo-700">投稿・開催期間</div>
+              <div className="text-[10px] font-bold text-indigo-700">投稿期間</div>
               <div className="mt-0.5 text-sm font-extrabold leading-relaxed text-slate-900">
                 {formatDateRange(festival.postingStart, festival.postingEnd)}
               </div>
             </div>
           ) : (
-            <>
-              <div className="flex min-h-[40px] flex-col justify-center rounded-lg border border-indigo-100 bg-white/85 px-3 py-2">
-                <div className="text-[10px] font-bold text-indigo-700">投稿期間</div>
-                <div className="mt-0.5 text-sm font-extrabold leading-relaxed text-slate-900">
-                  {formatDateRange(festival.postingStart, festival.postingEnd)}
-                </div>
+            <div className="row-span-2 flex min-h-[88px] flex-col justify-center rounded-lg border border-sky-100 bg-white/85 px-3 py-2">
+              <div className="text-[10px] font-bold text-sky-700">開催期間</div>
+              <div className="mt-0.5 text-sm font-extrabold leading-relaxed text-slate-900">
+                {formatDateRange(festival.eventStart, festival.eventEnd)}
               </div>
-              <div className="flex min-h-[40px] flex-col justify-center rounded-lg border border-sky-100 bg-white/85 px-3 py-2">
-                <div className="text-[10px] font-bold text-sky-700">開催期間</div>
-                <div className="mt-0.5 text-sm font-extrabold leading-relaxed text-slate-900">
-                  {formatDateRange(festival.eventStart, festival.eventEnd)}
-                </div>
-              </div>
-            </>
+            </div>
           )}
-      </div>
+        </div>
+      )}
       {(festival.organizer || festival.organizerUrl) && (
         <div className="mt-2 flex gap-2 text-xs">
           <span className="w-16 shrink-0 font-bold text-slate-500">主催</span>

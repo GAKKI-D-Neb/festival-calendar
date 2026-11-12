@@ -50,19 +50,25 @@ export function formatDateRange(start: string | null, end: string | null): strin
     startTime.hour === 0 && startTime.minute === 0 &&
     endTime.hour === 23 && endTime.minute === 59;
 
-  if (isWholeDayRange) {
-    const dateFormatter = new Intl.DateTimeFormat("ja-JP", {
-      timeZone: "Asia/Tokyo",
-      year: "numeric",
-      month: "numeric",
-      day: "numeric"
-    });
-    return `${dateFormatter.format(s)}〜${dateFormatter.format(e)}`;
-  }
-
+  const dateFormatter = new Intl.DateTimeFormat("ja-JP", {
+    timeZone: "Asia/Tokyo",
+    year: "numeric",
+    month: "numeric",
+    day: "numeric"
+  });
   const sameDay =
     s.toLocaleDateString("ja-JP", { timeZone: "Asia/Tokyo" }) ===
     e.toLocaleDateString("ja-JP", { timeZone: "Asia/Tokyo" });
+
+  // 1日間の終日イベントは、日付だけを表示する。
+  if (sameDay && isWholeDayRange) {
+    return dateFormatter.format(s);
+  }
+
+  if (isWholeDayRange) {
+    return `${dateFormatter.format(s)}〜${dateFormatter.format(e)}`;
+  }
+
   if (sameDay) {
     const date = new Intl.DateTimeFormat("ja-JP", {
       timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit"
@@ -79,19 +85,50 @@ export function formatDateRange(start: string | null, end: string | null): strin
 }
 
 export function getFestivalStatus(festival: Festival, now = Date.now()): FestivalStatus {
-  const postingStart = new Date(festival.postingStart).getTime();
-  const postingEnd = new Date(festival.postingEnd).getTime();
-  const eventStart = festival.eventStart ? new Date(festival.eventStart).getTime() : null;
-  const eventEnd = festival.eventEnd ? new Date(festival.eventEnd).getTime() : null;
+  const postingStart = festival.postingStart
+    ? new Date(festival.postingStart).getTime()
+    : null;
+  const postingEnd = festival.postingEnd
+    ? new Date(festival.postingEnd).getTime()
+    : null;
+  const eventStart = festival.eventStart
+    ? new Date(festival.eventStart).getTime()
+    : null;
+  const eventEnd = festival.eventEnd
+    ? new Date(festival.eventEnd).getTime()
+    : null;
 
-  if (eventStart !== null && eventEnd !== null && now >= eventStart && now <= eventEnd) {
+  const validPostingStart =
+    postingStart !== null && Number.isFinite(postingStart) ? postingStart : null;
+  const validPostingEnd =
+    postingEnd !== null && Number.isFinite(postingEnd) ? postingEnd : null;
+  const validEventStart =
+    eventStart !== null && Number.isFinite(eventStart) ? eventStart : null;
+  const validEventEnd =
+    eventEnd !== null && Number.isFinite(eventEnd) ? eventEnd : null;
+
+  if (
+    validEventStart !== null &&
+    validEventEnd !== null &&
+    now >= validEventStart &&
+    now <= validEventEnd
+  ) {
     return "event-active";
   }
-  if (now < postingStart) return "upcoming";
-  if (now <= postingEnd) return "accepting";
 
-  const finalEnd = eventEnd ?? postingEnd;
-  if (now > finalEnd) return "ended";
+  // 投稿期間がないイベントは、開催期間を基準に状態を判定する。
+  if (validPostingStart === null && validPostingEnd === null) {
+    if (validEventStart !== null && now < validEventStart) return "upcoming";
+    if (validEventEnd !== null && now > validEventEnd) return "ended";
+    if (validEventStart !== null || validEventEnd !== null) return "event-active";
+    return "ended";
+  }
+
+  if (validPostingStart !== null && now < validPostingStart) return "upcoming";
+  if (validPostingEnd !== null && now <= validPostingEnd) return "accepting";
+
+  const finalEnd = validEventEnd ?? validPostingEnd;
+  if (finalEnd !== null && now > finalEnd) return "ended";
   return "posting-ended";
 }
 
