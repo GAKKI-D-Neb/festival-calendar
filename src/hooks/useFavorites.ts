@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { syncNotificationTargets } from "@/lib/notificationStorage";
 
 const STORAGE_KEY = "festival-calendar-favorites";
 
@@ -24,7 +25,10 @@ export function useFavorites() {
   }, []);
 
   useEffect(() => {
-    if (ready) localStorage.setItem(STORAGE_KEY, JSON.stringify(favoriteIds));
+    if (!ready) return;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(favoriteIds));
+    // お気に入り登録を通知対象にも自動反映する。通知全体のON/OFFは維持する。
+    syncNotificationTargets(favoriteIds);
   }, [favoriteIds, ready]);
 
   function toggleFavorite(id: string) {

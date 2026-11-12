@@ -172,7 +172,7 @@ export function FestivalCard({
     !hasPosting && status === "upcoming" ? "開催前" : statusLabels[status];
 
   return (
-    <article className="flex h-full min-w-0 w-full flex-col rounded-xl border border-slate-200 bg-white p-3 shadow-sm transition hover:border-slate-300 hover:shadow-md">
+    <article id={`festival-${festival.id}`} className="flex h-full min-w-0 w-full flex-col rounded-xl border border-slate-200 bg-white p-3 shadow-sm transition hover:border-slate-300 hover:shadow-md">
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0 flex-1">
           <div className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-2">
