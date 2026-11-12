@@ -117,15 +117,15 @@ async function main() {
 
       const postingStart = parseDate(get(row, "投稿期間開始日時"));
       const postingEnd = parseDate(get(row, "投稿期間終了日時"));
-      if (!postingStart || !postingEnd) {
-        console.warn(`投稿期間が未設定のためスキップ: ${name}`);
-        continue;
-      }
-
-      // 開催期間が空欄なら、投稿期間と同じ期間として扱う。
-      // 片方だけ入力されている場合も、未入力側を投稿期間の日付で補完する。
+      // 投稿期間がなくても、開催期間があれば掲載する。
+      // 開催期間が空欄の場合は従来どおり投稿期間で補完する。
       const eventStart = parseDate(get(row, "開催期間開始日時")) ?? postingStart;
       const eventEnd = parseDate(get(row, "開催期間終了日時")) ?? postingEnd;
+
+      if (!postingStart && !postingEnd && !eventStart && !eventEnd) {
+        console.warn(`投稿期間・開催期間がともに未設定のためスキップ: ${name}`);
+        continue;
+      }
       const targets = get(row, "対象").split(",").map((item) => item.trim()).filter(Boolean);
 
       const id = get(row, "ID") || `${yearText}_${name}`.normalize("NFKC");
@@ -147,9 +147,12 @@ async function main() {
       });
     }
 
-    yearFestivals.sort(
-      (a, b) => new Date(a.postingStart).getTime() - new Date(b.postingStart).getTime()
-    );
+    yearFestivals.sort((a, b) => {
+      const startA = a.postingStart ?? a.eventStart;
+      const startB = b.postingStart ?? b.eventStart;
+      return (startA ? new Date(startA).getTime() : Infinity) -
+        (startB ? new Date(startB).getTime() : Infinity);
+    });
     const year = Number(yearText);
     availableYears.push(year);
     const outputPath = path.join(outputDir, `festivals-${year}.json`);
