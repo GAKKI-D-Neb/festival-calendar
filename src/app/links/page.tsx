@@ -66,7 +66,11 @@ export default function LinksPage() {
         </p>
         <div className="mt-5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-7 text-amber-950">
           <p className="font-extrabold">掲載情報についてのご注意</p>
-          <p className="mt-1">本サイトは非公式のものであり、掲載内容には誤りや更新の遅れが含まれる可能性があります。参加方法・開催日時・応募条件などの正確な情報は、必ず各投稿祭の公式ページや主催者からの案内をご確認ください。</p>
+          <p className="mt-1">
+            本サイトは非公式のものであり、掲載内容には誤りや更新の遅れが含まれる可能性があります。
+            参加方法・開催日時・応募条件などの正確な情報は、必ず各投稿祭の公式ページや主催者からの案内をご確認ください。
+            また、本サイトに掲載された情報の誤りや更新の遅れ、本サイトの不具合などによって利用者に不利益が生じた場合でも、サイト作成者は責任を負いかねます。
+          </p>
         </div>
       </section>
       <section className="grid gap-5 md:grid-cols-2">

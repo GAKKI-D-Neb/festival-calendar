@@ -14,7 +14,6 @@ export default function NotificationSettingsPage() {
         <h1 className="mt-1 text-2xl font-black text-slate-900">通知設定</h1>
         <p className="mt-2 text-sm leading-6 text-slate-600">
           お気に入りに登録した投稿祭の日程について、サイト内のお知らせを表示するか設定できます。
-          プッシュ通知ではなく、サイトを開いたときに確認できるお知らせです。
         </p>
       </div>
 
