@@ -194,7 +194,7 @@ export function FestivalCalendar({
         <div className="overflow-hidden rounded-b-lg border-x border-b-2 border-slate-300">
           {weeks.map((weekKeys, weekIndex) => {
             const segments = makeSegments(items, weekKeys);
-            const laneCount = 4;
+            const laneCount = 6;
             return (
               <div key={weekIndex} className="border-b-2 border-slate-300 last:border-b-0">
                 <div className="grid grid-cols-7">
@@ -219,8 +219,8 @@ export function FestivalCalendar({
                       position: "absolute",
                       left: `${left}%`,
                       right: `${right}%`,
-                      top: `${Math.min(segment.lane, laneCount - 1) * 22 + 2}px`,
-                      height: "19px",
+                      top: `${segment.lane * 15 + 1}px`,
+                      height: "13px",
                       backgroundColor: segment.color
                     };
                     const isSelected = selected?.id === segment.festival.id;
@@ -230,7 +230,7 @@ export function FestivalCalendar({
                         onClick={() => setSelected(segment.festival)}
                         title={`${segment.festival.name}（${segment.type}）`}
                         style={style}
-                        className={`festival-calendar-bar z-10 overflow-hidden rounded-md border border-slate-300/80 px-1 text-left text-[12px] font-bold leading-[18px] text-slate-700 shadow-sm transition hover:brightness-95 ${isSelected?"ring-2 ring-slate-700 ring-offset-1":""}`}
+                        className={`festival-calendar-bar z-10 overflow-hidden rounded-[3px] border border-slate-300/80 px-0.5 text-left text-[9px] font-bold leading-[11px] text-slate-700 shadow-sm transition hover:brightness-95 ${isSelected?"ring-2 ring-slate-700 ring-offset-1":""}`}
                       >
                         {segment.festival.name}
                       </button>
