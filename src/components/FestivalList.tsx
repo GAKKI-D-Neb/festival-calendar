@@ -138,7 +138,7 @@ export function FestivalList() {
 
       {!loading && festivals.length > 0 && <FestivalFilters showEnded={showEnded} setShowEnded={setShowEnded} favoritesOnly={favoritesOnly} setFavoritesOnly={setFavoritesOnly} targets={targets} selectedTargets={selectedTargets} setSelectedTargets={setSelectedTargets} />}
       {loadError && <div role="alert" className="rounded-2xl border border-rose-200 bg-rose-50 p-4 text-sm font-semibold text-rose-800">{loadError}</div>}
-      {loading ? <div className="rounded-3xl border border-indigo-100 bg-white/80 p-12 text-center shadow-sm"><div className="mx-auto mb-3 h-8 w-8 animate-spin rounded-full border-4 border-indigo-100 border-t-indigo-600" /><p className="text-sm font-semibold text-slate-600">{year ?? "投稿祭"}年のデータを読み込んでいます…</p></div>
+      {loading && view === "cards" ? <div className="rounded-3xl border border-indigo-100 bg-white/80 p-12 text-center shadow-sm"><div className="mx-auto mb-3 h-8 w-8 animate-spin rounded-full border-4 border-indigo-100 border-t-indigo-600" /><p className="text-sm font-semibold text-slate-600">{year ?? "投稿祭"}年のデータを読み込んでいます…</p></div>
       : view === "cards" ? <>
         <div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_auto]">
           <label className="rounded-2xl border border-white bg-white/85 p-3 shadow-sm"><span className="mb-1 block text-xs font-extrabold text-slate-600">投稿祭名・主催者名で検索</span><input type="search" value={searchText} onChange={(e) => setSearchText(e.target.value)} placeholder="投稿祭名や主催者名を入力..." className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm outline-none transition focus:border-indigo-400 focus:bg-white focus:ring-2 focus:ring-indigo-100" /></label>
